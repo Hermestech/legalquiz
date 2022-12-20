@@ -1,5 +1,6 @@
 type AnswerType = {
     textAnswer: string
+    isRightAnswer: boolea
 }
 
 type QuestionType = {
