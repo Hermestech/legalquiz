@@ -9,6 +9,7 @@ export default function Home() {
   const [rightAnswer, setRightAnswer] = React.useState<boolean>(false)
   const [questionIndex, setQuestionIndex] = React.useState<number>(0)
   const [score, setScore] = React.useState<number>(0)
+  const [lifes, setLifes] = React.useState<number>(3)
   
   React.useEffect(() => {
     const fetchQuestions = async () => {
@@ -29,9 +30,19 @@ export default function Home() {
       setScore(score + 1)
     } else {
       setRightAnswer(false)
+      setLifes(lifes - 1)
     }
     nextQuestion()
   }
+
+
+const RemainingLives = () => {
+    return (
+      <Box sx={{ display:'flex', justifyContent:'center', gap:'.5rem', backgroundColor:'rgba(0.5, 0.5, 0.5 , 0.4)' }}>
+        {Array(lifes).fill(<span>❤️</span>)}
+      </Box>
+    )
+}
 
   const Answer = ({ answer }:any ) => {
     return <Button 
@@ -45,8 +56,8 @@ export default function Home() {
 
   const Question:React.FC<QuestionType> = ({ question, answersCollection }) => {
     return (
-      <>
-        <Card >
+      <Box sx={{ width: {sx:'350px', md:'500px'} }}>
+        <Card sx={{ marginBottom:'1rem' }}>
           <CardContent>
             <Typography variant='h5' component='h2'>
            {question}
@@ -58,49 +69,26 @@ export default function Home() {
           <Answer key={answer.textAnswer} answer={answer} />
         ))}
         </Box>
-      </>
+      </Box>
     );
   };
 
   if ( questionIndex >= questions.length){
-    return (
-      <Container sx={{ display:'flex', justifyContent:'center'}}>
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          minHeight: '100vh', 
-          width:'350px',
-          gap:'2rem'
-        }}
-      >
-        <p>Score: {score}</p>
-      </Box>
-      </Container>
-    )
+    return <p>Score: {score}</p>
   }
   
 
 
   return (
-    <Container sx={{ display:'flex', justifyContent:'center'}}>
-    <Box
-      sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        minHeight: '100vh', 
-        width:'350px',
-        gap:'2rem'
-      }}
-    >
-      {
-        questions.length > 0 ? <Question {...questions[questionIndex]} /> : <p>Loading...</p>
-      }      
-    </Box>    
-    </Container>
+    <Box sx={{ width:'100%'  }}>
+      <Box sx={{width:'100%', display:'flex', justifyContent:'flex-end'}}>
+        <RemainingLives />
+      </Box>
+      <Box sx={{width:'100%', height:'100%', display:'flex', justifyContent:'center', alignItems:'center' }}>
+        {
+          questions.length > 0 ? <Question {...questions[questionIndex]} /> : <p>Loading...</p>
+        } 
+      </Box>
+    </Box>
   )
 }
