@@ -6,6 +6,17 @@ type AnswerType = {
 type QuestionType = {
     question: string
     answersCollection: {
-        items: AnswerType[]
+        answers: AnswerType[]
+    }
+}
+
+type QuestionaryType = {
+    description: string
+    title: string   
+    questionsCollection: {
+        questions: QuestionType[]
+    }
+    sys: {
+        id: string
     }
 }

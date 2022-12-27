@@ -1,6 +1,6 @@
 import * as React from 'react'
-import { Box, Container,  } from '@mui/material'
-import ButtonAppBar from './ButtonAppBar'
+import { Container,  } from '@mui/material'
+import ButtonAppBar from '../atoms/ButtonAppBar/ButtonAppBar'
 
 export default function Layout ({ children }: React.PropsWithChildren<{}>) {
   return (

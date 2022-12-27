@@ -1,7 +1,7 @@
 import debug from 'debug'
 import { Client, OperationResult } from 'urql'
 import { getContentfulClient } from './contentful-setup'
-import { questionsCollectionQuery } from '../../queries'
+import { questionsCollectionQuery,questionaryCollectionQuery } from '../../queries'
 
 const gqlDebug = debug('graphql:queries')
 const gqlErrDebug = debug('graphql:errors')
@@ -36,4 +36,17 @@ export const getQuestions = async (options = {} as any) => {
   errCheck(response)
   const { questionsCollection } = response.data
   return questionsCollection
+}
+
+export const getQuestionaries = async (options = {} as any) => {
+  const client: Client = options.client
+    ? (options.client as Client)
+    : getContentfulClient()
+  gqlDebug(
+    `\nWill execute #getHomepage to ${printableClientUrl(client)} endpoint`
+  )
+  const response = await client.query(questionaryCollectionQuery).toPromise()
+  errCheck(response)
+  const { questionaryCollection } = response.data
+  return questionaryCollection
 }
