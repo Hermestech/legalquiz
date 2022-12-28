@@ -2,31 +2,89 @@ import * as React from "react";
 import { Question } from "../../molecules/Question/Question";
 import useAppContext from "../../../contexts/AppContext";
 
-import { Box } from "@mui/material";
+import { Box, Chip, Typography, Button, Rating } from "@mui/material";
+import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import { styled } from "@mui/material/styles";
+
+import { useRouter } from "next/router";
 
 interface GameLayoutProps {
   questions: QuestionType[];
 }
 
-export default function GameLayout({ questions }: GameLayoutProps) {
+type ScoreTableProps = {
+  score: number
+}
 
-const {  questionIndex, score, lifes } = useAppContext()
+const ScoreTable = ({score}:ScoreTableProps ) => {
+  return <Chip label={`${score} puntos`} />
+}
+
+const StyledRating = styled(Rating)({
+  '& .MuiRating-iconFilled': {
+    color: '#ff6d75',
+  },
+  '& .MuiRating-iconHover': {
+    color: '#ff3d47',
+  },
+});
+
+
+export default function GameLayout({ questions }: GameLayoutProps) {
+const router = useRouter()
+const {  questionIndex, score, lifes, setQuestionIndex, setScore, setLifes } = useAppContext()
 
 const RemainingLives = () => {
     return (
-        <Box sx={{ display:'flex', justifyContent:'center', gap:'.5rem', backgroundColor:'rgba(0.5, 0.5, 0.5 , 0.4)' }}>
-            {Array(lifes).fill(0).map((_, index) => (<span key={index}>❤️</span>))}
-        </Box>
+      <StyledRating
+        name="customized-color"
+        defaultValue={lifes}
+        getLabelText={(lifes: number) => `${lifes} Heart${lifes !== 1 ? 's' : ''}`}
+        precision={1}
+        max={lifes}
+        icon={<FavoriteIcon fontSize="inherit" />}
+        emptyIcon={<FavoriteBorderIcon fontSize="inherit" />}
+      />
     )
 }
 
     if ( questionIndex >= questions.length){
-        return <p>Score: {score}</p>
+        return (
+          <Box sx={{ width:'100%', height:'100%', justifySelf:'center', alignSelf:'center', display:'flex', flexDirection:'column', gap:'1rem', justifyContent:'center', alignItems:'center'  }}>
+            <EmojiEventsIcon sx={{ fontSize: 100 }} />
+            <Typography variant="h2" component="h2">{score}</Typography>
+            <Button 
+            variant="outlined"
+            onClick={() => {setQuestionIndex(0), setScore(0), setLifes(3) }}
+            >Jugar de nuevo</Button>
+            <Button 
+            variant="outlined"
+            onClick={() => {
+              setQuestionIndex(0), 
+              setScore(0), 
+              setLifes(3),
+              router.push('/')
+            }}
+            >Elegir otro cuestionario</Button>
+          </Box>
+        )
     }
 
     return (
-    <Box sx={{ width:'100%', height:'100%', justifySelf:'center', alignSelf:'center', display:'flex', flexDirection:'column', gap:'1rem'  }}>
-      <Box sx={{width:'100%', display:'flex', justifyContent:'flex-end'}}>
+    <Box sx={{ width:'100%', 
+     height:'100%', 
+     justifySelf:'center',
+     alignSelf:'center',
+     display:'flex',
+     flexDirection:'column',
+     gap:'1rem',
+     justifyContent:'center',
+     alignItems:'center'
+     }}>
+      <Box sx={{width:{xs:'100%', md:'60%' }, display:'flex', justifyContent:'space-between'}}>
+        <ScoreTable score={score} />
         <RemainingLives />
       </Box>
       <Box sx={{width:'100%', display:'flex', justifyContent:'center', alignItems:'center' }}>
