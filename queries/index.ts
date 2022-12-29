@@ -25,6 +25,7 @@ query {
     sys { ...SysFields }
       title
       description
+      difficulty
       questionsCollection: questionaryquestionsCollection(limit:10){
         questions: items{
           sys { ...SysFields }

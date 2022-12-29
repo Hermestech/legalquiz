@@ -13,6 +13,7 @@ type QuestionType = {
 type QuestionaryType = {
     description: string
     title: string   
+    difficulty: string
     questionsCollection: {
         questions: QuestionType[]
     }
