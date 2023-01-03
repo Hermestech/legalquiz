@@ -13,7 +13,7 @@ export const Answer = ({ answer }:any ) => {
     const handleAnswer = (answer:AnswerType) => {
         if(answer.isRightAnswer) {
             setRightAnswer(true)
-            setScore(score + 1)
+            setScore(score + 100)
         } else {
             setRightAnswer(false)
             setLifes(lifes - 1)

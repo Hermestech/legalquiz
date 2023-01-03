@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Box, Card, Container, Grid, Typography } from "@mui/material"
+import { Avatar,IconButton, Card, Container, Grid, Typography, CardContent, CardActionArea, Divider, CardHeader } from "@mui/material"
 import Router from "next/router";
 
 
@@ -18,14 +18,31 @@ export default function QuestionariesLayout({ questionaries }: QuestionariesLayo
                     <Card
                         onClick={() => {Router.push(`/${questionary.sys.id}`)}}
                     >
-                        <Box p={2}>
-                            <Typography variant="h5" component="h2">
+                              <CardHeader
+        avatar={
+          <Avatar sx={{ bgcolor: 'red' }} aria-label="recipe">
+            R
+          </Avatar>
+        }
+        title={questionary.title}
+        subheader={questionary.description}
+      />
+                        <CardContent>
+                        <Typography variant="h5" component="h2">
                                 {questionary.title}
                             </Typography>
                             <Typography variant="body2" color="text.secondary">
                                 {questionary.description}
                             </Typography>
-                        </Box>
+                        </CardContent>
+                        <Divider />
+                        <CardActionArea
+                            sx={{ padding:'1rem' }}
+                        >
+                            <Typography variant="body2" color="text.secondary">
+                                {questionary.difficulty}
+                            </Typography>
+                        </CardActionArea>
                     </Card>
                 </Grid>
             ))}
