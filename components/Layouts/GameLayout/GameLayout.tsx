@@ -1,5 +1,6 @@
 import * as React from "react";
 import { Question } from "../../molecules/Question/Question";
+import AlertDialogSlide from "../../atoms/AlertDialog/AlertDialog";
 import useAppContext from "../../../contexts/AppContext";
 
 import { Box, Chip, Typography, Button, Rating } from "@mui/material";
@@ -35,6 +36,18 @@ const StyledRating = styled(Rating)({
 export default function GameLayout({ questions }: GameLayoutProps) {
 const router = useRouter()
 const {  questionIndex, score, lifes, setQuestionIndex, setScore, setLifes } = useAppContext()
+const [open, setOpen] = React.useState(false);
+const [ instructionsReaded, setInstructionsReaded ] = React.useState(false)
+
+React.useEffect(() => { 
+  const instructionsReaded =localStorage.getItem('instructionsReaded') 
+  if (instructionsReaded === 'true') {
+    setInstructionsReaded(true)
+  }
+  if (questionIndex === 0 && !instructionsReaded) {
+    setOpen(true)
+  }
+}, [ questionIndex, instructionsReaded])
 
 const RemainingLives = () => {
     return (
@@ -92,6 +105,11 @@ const RemainingLives = () => {
           questions.length > 0 ? <Question {...questions[questionIndex]} /> : <p>Loading...</p>
         } 
       </Box>
+      <AlertDialogSlide 
+        open={open} 
+        setOpen={setOpen} 
+        setInstructionsReaded={setInstructionsReaded}
+        />
     </Box>
   )
 
