@@ -21,3 +21,8 @@ type QuestionaryType = {
         id: string
     }
 }
+
+type SelectedAnswerType = {
+    question: string,
+    answer: AnswerType
+}

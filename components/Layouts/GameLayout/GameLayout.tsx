@@ -1,6 +1,8 @@
+/* eslint-disable @next/next/no-html-link-for-pages */
 import * as React from "react";
 import { Question } from "../../molecules/Question/Question";
 import AlertDialogSlide from "../../atoms/AlertDialog/AlertDialog";
+import  AnswersTable  from "../../molecules/AnswersTable/answers-table";
 import useAppContext from "../../../contexts/AppContext";
 
 import { Box, Chip, Typography, Button, Rating } from "@mui/material";
@@ -35,9 +37,10 @@ const StyledRating = styled(Rating)({
 
 export default function GameLayout({ questions }: GameLayoutProps) {
 const router = useRouter()
-const {  questionIndex, score, lifes, setQuestionIndex, setScore, setLifes } = useAppContext()
+const {  questionIndex, score, lifes, setQuestionIndex, setScore, setLifes, setSelectedAnswers } = useAppContext()
 const [open, setOpen] = React.useState(false);
-const [ instructionsReaded, setInstructionsReaded ] = React.useState(false)
+const [instructionsReaded, setInstructionsReaded] = React.useState(false)
+const [showAnswers, setShowAnswers] = React.useState(false)
 
 React.useEffect(() => { 
   const instructionsReaded =localStorage.getItem('instructionsReaded') 
@@ -70,7 +73,7 @@ const RemainingLives = () => {
             <Typography variant="h2" component="h2">{score}</Typography>
             <Button 
             variant="outlined"
-            onClick={() => {setQuestionIndex(0), setScore(0), setLifes(3) }}
+            onClick={() => {setQuestionIndex(0), setScore(0), setLifes(3), setSelectedAnswers([]) }}
             >Jugar de nuevo</Button>
             <Button 
             variant="outlined"
@@ -78,9 +81,27 @@ const RemainingLives = () => {
               setQuestionIndex(0), 
               setScore(0), 
               setLifes(3),
+              setSelectedAnswers([]),
               router.push('/')
             }}
             >Elegir otro cuestionario</Button>
+            <Button
+              variant="outlined"
+              onClick={() => setShowAnswers(!showAnswers)}
+            >
+              Ver Respuestas
+            </Button>
+
+            <Button
+              variant="outlined"
+            >
+              <a href="/api/auth/login">
+                ¿Persistir los puntos? logeate. 
+              </a>
+            </Button>
+            {
+              showAnswers && <AnswersTable />
+            }
           </Box>
         )
     }
