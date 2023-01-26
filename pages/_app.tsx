@@ -3,11 +3,17 @@ import type { AppProps } from 'next/app'
 import Layout from '../components/Layouts/Layout'
 import { AppContextProvider } from '../contexts/AppContext'
 import { SetStateAction } from 'react'
-import { UserProvider } from '@auth0/nextjs-auth0/client'
+import { Auth0Provider } from '@auth0/auth0-react'
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <UserProvider>
+    <Auth0Provider
+      domain='dev-quv7yrhnnt0xjap3.us.auth0.com'
+      clientId='eyJtT922gSURPkSXdBeovuvVTWemB8ZR'
+      authorizationParams={{
+      redirect_uri: 'http://localhost:3000'
+    }}
+    >
       <AppContextProvider questionaries={[]} questions={[]} rightAnswer={false} questionIndex={0} score={0} lifes={0} setRightAnswer={function (value: SetStateAction<boolean>): void {
         throw new Error('Function not implemented.')
       } } setQuestionIndex={function (value: SetStateAction<number>): void {
@@ -27,6 +33,6 @@ export default function App({ Component, pageProps }: AppProps) {
           <Component {...pageProps} />
         </Layout>
       </AppContextProvider> 
-    </UserProvider>
+    </Auth0Provider>
   )
 }
