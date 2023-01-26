@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-html-link-for-pages */
 import * as React from "react";
 import { Question } from "../../molecules/Question/Question";
 import AlertDialogSlide from "../../atoms/AlertDialog/AlertDialog";
@@ -81,6 +82,13 @@ const RemainingLives = () => {
               router.push('/')
             }}
             >Elegir otro cuestionario</Button>
+            <Button
+              variant="outlined"
+            >
+              <a href="/api/auth/login">
+                ¿Persistir los puntos? logeate. 
+              </a>
+            </Button>
           </Box>
         )
     }
