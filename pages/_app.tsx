@@ -20,7 +20,9 @@ export default function App({ Component, pageProps }: AppProps) {
         throw new Error('Function not implemented.')
       } } setQuestionaries={function (value: SetStateAction<QuestionaryType[]>): void {
         throw new Error('Function not implemented.')
-      } }>
+      } } selectedAnswers={[]} setSelectedAnswers={function (value: SetStateAction<SelectedAnswerType[]>): void {
+        throw new Error('Function not implemented.')
+      } }      >
         <Layout>
           <Component {...pageProps} />
         </Layout>

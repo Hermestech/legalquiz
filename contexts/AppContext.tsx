@@ -10,12 +10,14 @@ interface AppContextType {
     questionIndex: number;
     score: number;
     lifes: number;
+    selectedAnswers: SelectedAnswerType[];
     setRightAnswer: React.Dispatch<React.SetStateAction<boolean>>;
     setQuestionIndex: React.Dispatch<React.SetStateAction<number>>;
     setScore: React.Dispatch<React.SetStateAction<number>>;
     setLifes: React.Dispatch<React.SetStateAction<number>>;
     setQuestions: React.Dispatch<React.SetStateAction<QuestionType[]>>;
     setQuestionaries: React.Dispatch<React.SetStateAction<QuestionaryType[]>>;
+    setSelectedAnswers: React.Dispatch<React.SetStateAction<SelectedAnswerType[]>>;
 }
 
 export const AppContext = React.createContext({} as AppContextType );
@@ -25,6 +27,7 @@ export const AppContextProvider: React.FC<PropsWithChildren<AppContextType>>  = 
     const [questions, setQuestions] = React.useState<QuestionType[]>([]);
     const [rightAnswer, setRightAnswer] = React.useState<boolean>(false);
     const [questionIndex, setQuestionIndex] = React.useState<number>(0);
+    const [selectedAnswers, setSelectedAnswers] = React.useState<SelectedAnswerType[]>([]);
     const [score, setScore] = React.useState<number>(0);
     const [lifes, setLifes] = React.useState<number>(3);
 
@@ -45,13 +48,15 @@ export const AppContextProvider: React.FC<PropsWithChildren<AppContextType>>  = 
         score,
         lifes,
         questionaries,
+        selectedAnswers,
         setQuestions,
         setRightAnswer,
         setQuestionIndex,
         setScore,
         setLifes,
         setQuestionaries,
-    }), [questions, rightAnswer, questionIndex, score, lifes, questionaries]);
+        setSelectedAnswers
+    }), [questions, rightAnswer, questionIndex, score, lifes, questionaries, selectedAnswers]);
         
     return (
         <AppContext.Provider value={values}>

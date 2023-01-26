@@ -3,8 +3,8 @@ import { Button } from '@mui/material'
 import useAppContext from '../../../contexts/AppContext'
 
 
-export const Answer = ({ answer }:any ) => {
-    const { setRightAnswer, setScore, setLifes, setQuestionIndex, score, lifes, questionIndex } = useAppContext()
+export const Answer = ({ answer, question }:any ) => {
+    const { setRightAnswer, setScore, setLifes, setQuestionIndex, score, lifes, questionIndex, setSelectedAnswers, selectedAnswers } = useAppContext()
     
     const nextQuestion = () => {
         setQuestionIndex(questionIndex + 1)
@@ -19,6 +19,7 @@ export const Answer = ({ answer }:any ) => {
             setLifes(lifes - 1)
         }
         nextQuestion()
+        setSelectedAnswers([...selectedAnswers, { question, answer }])
     }
 
 

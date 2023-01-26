@@ -14,7 +14,7 @@ export const Question:React.FC<QuestionType> = ({ question, answersCollection })
         </Card>
         <Box sx={{ display:'flex', justifyContent:'center', flexDirection:'column', gap:'.5rem', width:'100%'}}>
         {answersCollection.answers.map(answer => (
-          <Answer key={answer.textAnswer} answer={answer} />
+          <Answer key={answer.textAnswer} answer={answer} question={question} />
         ))}
         </Box>
       </Box>
