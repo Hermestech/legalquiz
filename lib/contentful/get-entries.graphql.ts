@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import debug from 'debug'
 import { Client, OperationResult } from 'urql'
 import { getContentfulClient } from './contentful-setup'

@@ -1,3 +1,5 @@
+/* eslint-disable no-case-declarations */
+
 import {
   getSession,
   getAccessToken,
@@ -25,13 +27,15 @@ export default withApiAuthRequired(async function handler(req, res) {
             dataSource: process.env.MONGODB_DATA_SOURCE,
             database: "social_butterfly",
             collection: "users",
+            filter: { email: user.email },
           }),
         });
 
         const readDataJson = await readData.json();
+        console.log(readDataJson);
 
-        if (!readDataJson.document.email) {
-          await fetch(`${baseUrl}/updateOne`, {
+        if (readDataJson.document === null) {
+          await fetch(`${baseUrl}/insertOne`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -42,19 +46,15 @@ export default withApiAuthRequired(async function handler(req, res) {
               dataSource: process.env.MONGODB_DATA_SOURCE,
               database: "social_butterfly",
               collection: "users",
-              filter: { _id: { $oid: readDataJson.document._id } },
-              update: {
-                $set: {
-                  email: user.email,
-                  name: user.name,
-                  picture: user.picture,
-                  nickname: user.nickname,
-                },
+              document: {
+                email: user.email,
+                name: user.name,
+                picture: user.picture,
+                nickname: user.nickname,
               },
             }),
           });
           readDataJson.document = {
-            ...readDataJson.document,
             email: user.email,
             name: user.name,
             picture: user.picture,

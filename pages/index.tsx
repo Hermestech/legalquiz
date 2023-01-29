@@ -21,8 +21,11 @@ export default function Home() {
 
   const { questionaries } = useAppContext()
 
+  if (isLoading) { 
+    return <div>Loading...</div>
+  }
 
-return <QuestionariesLayout questionaries={questionaries} />
+  return <QuestionariesLayout questionaries={questionaries} />
 }
 
 export const getServerSideProps = withPageAuthRequired()

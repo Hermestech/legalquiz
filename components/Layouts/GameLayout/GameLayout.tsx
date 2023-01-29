@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-html-link-for-pages */
 import * as React from "react";
 import { Question } from "../../molecules/Question/Question";
 import AlertDialogSlide from "../../atoms/AlertDialog/AlertDialog";
@@ -42,11 +41,24 @@ const {  questionIndex, score, lifes, setQuestionIndex, setScore, setLifes, setS
 const [open, setOpen] = React.useState(false);
 const [instructionsReaded, setInstructionsReaded] = React.useState(false)
 const [showAnswers, setShowAnswers] = React.useState(false)
-const user = useUser()
-  
-console.log('user', user)
-  
-const questionary = {
+const [hasSubmitted, setHasSubmitted] = React.useState(false)
+const endOfQuestions = questionIndex >= questions.length -1   
+
+const user = useUser() 
+
+
+
+React.useEffect(() => { 
+  const instructionsReaded =localStorage.getItem('instructionsReaded') 
+  if (instructionsReaded === 'true') {
+    setInstructionsReaded(true)
+  }
+  if (questionIndex === 0 && !instructionsReaded) {
+    setOpen(true)
+  }
+
+  if (user && endOfQuestions && selectedAnswers.length >= 3 && hasSubmitted === false) { 
+    const questionary = {
       postedAt: Date.now(),
       body: {
         score,
@@ -59,19 +71,6 @@ const questionary = {
         picture: user.picture || ''
       }
   } 
-
-
-React.useEffect(() => { 
-  const instructionsReaded =localStorage.getItem('instructionsReaded') 
-  if (instructionsReaded === 'true') {
-    setInstructionsReaded(true)
-  }
-  if (questionIndex === 0 && !instructionsReaded) {
-    setOpen(true)
-  }
-
-  if (user && questionIndex >= questions.length) { 
-    console.log('persisting questionary')
     fetch('/api/questionary', {
       method: 'POST',
       headers: {
@@ -79,9 +78,17 @@ React.useEffect(() => {
       },
       body: JSON.stringify(questionary)
     })
+    .then(response => {
+      if (response.ok) {
+        setHasSubmitted(true);
+      }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
   }
 
-}, [ questionIndex, instructionsReaded])
+}, [ questionIndex, instructionsReaded, selectedAnswers, user, endOfQuestions, score, hasSubmitted])
 
 const RemainingLives = () => {
     return (
@@ -104,7 +111,13 @@ const RemainingLives = () => {
             <Typography variant="h2" component="h2">{score}</Typography>
             <Button 
             variant="outlined"
-            onClick={() => {setQuestionIndex(0), setScore(0), setLifes(3), setSelectedAnswers([]) }}
+              onClick={() => {
+                setQuestionIndex(0),
+                setScore(0),
+                setLifes(3),
+                setSelectedAnswers([]),
+                setHasSubmitted(false)  
+              }}
             >Jugar de nuevo</Button>
             <Button 
             variant="outlined"
@@ -113,6 +126,7 @@ const RemainingLives = () => {
               setScore(0), 
               setLifes(3),
               setSelectedAnswers([]),
+              setHasSubmitted(false),  
               router.push('/')
             }}
             >Elegir otro cuestionario</Button>
