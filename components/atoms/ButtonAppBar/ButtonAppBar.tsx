@@ -6,9 +6,14 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import { useUser } from '@auth0/nextjs-auth0';
+import Image from 'next/image';
+import Link from 'next/link';
+
+import { useRouter } from 'next/router';
 
 export default function ButtonAppBar() {
   const { user } = useUser();
+  const router = useRouter();
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -19,11 +24,20 @@ export default function ButtonAppBar() {
             color="inherit"
             aria-label="menu"
             sx={{ mr: 2 }}
+            onClick={() => { 
+                router.push('/')
+            }}
           >
-            menu
+            <Image src="/lawyer-logo.png"
+              alt="logo de un gatito abogado"
+              width={40}
+              height={40}
+            />
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            News
+            <Link href={'/about'}>
+              Sobre el proyecto
+            </Link>
           </Typography>
           
           {

@@ -46,7 +46,7 @@ const endOfQuestions = questionIndex >= questions.length -1
 
 const user = useUser() 
 
-
+const authenticatedUser = user && user.email
 
 React.useEffect(() => { 
   const instructionsReaded =localStorage.getItem('instructionsReaded') 
@@ -57,7 +57,8 @@ React.useEffect(() => {
     setOpen(true)
   }
 
-  if (user && endOfQuestions && selectedAnswers.length >= 3 && hasSubmitted === false) { 
+  if (authenticatedUser && endOfQuestions && selectedAnswers.length >= 3 && hasSubmitted === false) { 
+    console.log('me ejecuto')
     const questionary = {
       postedAt: Date.now(),
       body: {
@@ -136,14 +137,16 @@ const RemainingLives = () => {
             >
               Ver Respuestas
             </Button>
-
-            <Button
-              variant="outlined"
-            >
-              <a href="/api/auth/login">
-                ¿Persistir los puntos? logeate. 
-              </a>
-            </Button>
+            {
+              !authenticatedUser && (
+              <Button
+              variant="outlined">
+                <a href="/api/auth/login">
+                  ¿Persistir los puntos? logeate. 
+                </a>
+              </Button>
+              )
+            }
             {
               showAnswers && <AnswersTable />
             }
