@@ -12,6 +12,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { styled } from "@mui/material/styles";
 
 import { useRouter } from "next/router";
+import { useUser } from "../../../contexts/UserContext";
 
 interface GameLayoutProps {
   questions: QuestionType[];
@@ -37,10 +38,28 @@ const StyledRating = styled(Rating)({
 
 export default function GameLayout({ questions }: GameLayoutProps) {
 const router = useRouter()
-const {  questionIndex, score, lifes, setQuestionIndex, setScore, setLifes, setSelectedAnswers } = useAppContext()
+const {  questionIndex, score, lifes, setQuestionIndex, setScore, setLifes, setSelectedAnswers, selectedAnswers } = useAppContext()
 const [open, setOpen] = React.useState(false);
 const [instructionsReaded, setInstructionsReaded] = React.useState(false)
 const [showAnswers, setShowAnswers] = React.useState(false)
+const user = useUser()
+  
+console.log('user', user)
+  
+const questionary = {
+      postedAt: Date.now(),
+      body: {
+        score,
+        selectedAnswers
+      },
+      user: {
+        id: user.id,
+        name: user.name || '',
+        email: user.email || '',
+        picture: user.picture || ''
+      }
+  } 
+
 
 React.useEffect(() => { 
   const instructionsReaded =localStorage.getItem('instructionsReaded') 
@@ -50,6 +69,18 @@ React.useEffect(() => {
   if (questionIndex === 0 && !instructionsReaded) {
     setOpen(true)
   }
+
+  if (user && questionIndex >= questions.length) { 
+    console.log('persisting questionary')
+    fetch('/api/questionary', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(questionary)
+    })
+  }
+
 }, [ questionIndex, instructionsReaded])
 
 const RemainingLives = () => {
