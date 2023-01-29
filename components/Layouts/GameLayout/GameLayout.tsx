@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-html-link-for-pages */
 import * as React from "react";
 import { Question } from "../../molecules/Question/Question";
 import AlertDialogSlide from "../../atoms/AlertDialog/AlertDialog";
@@ -45,10 +44,7 @@ const [showAnswers, setShowAnswers] = React.useState(false)
 const [hasSubmitted, setHasSubmitted] = React.useState(false)
 const endOfQuestions = questionIndex >= questions.length -1   
 
-const user = useUser()
-  
-console.log('user', user)
-  
+const user = useUser() 
 
 
 
@@ -62,7 +58,6 @@ React.useEffect(() => {
   }
 
   if (user && endOfQuestions && selectedAnswers.length >= 3 && hasSubmitted === false) { 
-    console.log('ya me puedes mandar')
     const questionary = {
       postedAt: Date.now(),
       body: {

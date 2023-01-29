@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-html-link-for-pages */
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -9,7 +8,7 @@ import IconButton from '@mui/material/IconButton';
 import { useUser } from '@auth0/nextjs-auth0';
 
 export default function ButtonAppBar() {
-  const { user, error, isLoading } = useUser();
+  const { user } = useUser();
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">

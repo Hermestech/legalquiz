@@ -4,7 +4,6 @@ import {
     Dialog,
     DialogActions,
     DialogContent,
-    DialogContentText, 
     DialogTitle, 
     Slide, 
     styled,
@@ -23,7 +22,7 @@ interface AlertDialogSlideProps {
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
-    children: React.ReactElement<any, any>;
+    children: React.ReactElement;
   },
   ref: React.Ref<unknown>,
 ) {
@@ -44,9 +43,6 @@ export default function AlertDialogSlide({
 
   return (
     <div>
-      {/* <Button variant="outlined" onClick={handleClickOpen}>
-        Slide in alert dialog
-      </Button> */}
       <Dialog
         open={open}
         TransitionComponent={Transition}

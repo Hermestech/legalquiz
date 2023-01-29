@@ -3,7 +3,7 @@ import { Button } from '@mui/material'
 import useAppContext from '../../../contexts/AppContext'
 
 
-export const Answer = ({ answer, question }:any ) => {
+export const Answer = ({ answer, question }: SelectedAnswerType ) => {
     const { setRightAnswer, setScore, setLifes, setQuestionIndex, score, lifes, questionIndex, setSelectedAnswers, selectedAnswers } = useAppContext()
     
     const nextQuestion = () => {

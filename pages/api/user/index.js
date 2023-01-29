@@ -1,3 +1,5 @@
+/* eslint-disable no-case-declarations */
+
 import {
   getSession,
   getAccessToken,
@@ -32,7 +34,7 @@ export default withApiAuthRequired(async function handler(req, res) {
         const readDataJson = await readData.json();
         console.log(readDataJson);
 
-        if (readDataJson.document === null) { 
+        if (readDataJson.document === null) {
           await fetch(`${baseUrl}/insertOne`, {
             method: "POST",
             headers: {
