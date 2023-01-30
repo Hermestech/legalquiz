@@ -158,14 +158,14 @@ if ( questionIndex >= questions.length && questions.length > 0) {
 
   return (
     <Box sx={{ width:'100%', 
-     height:'100%', 
+     height:'50%', 
      justifySelf:'center',
      alignSelf:'center',
      display:'flex',
      flexDirection:'column',
      gap:'1rem',
      justifyContent:'center',
-     alignItems:'center'
+     alignItems: 'center'
       }}>
       <Box sx={{width:{xs:'100%', md:'60%' }, display:'flex', justifyContent:'space-between'}}>
         <ScoreTable score={score} />
