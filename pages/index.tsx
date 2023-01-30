@@ -2,6 +2,7 @@ import * as React from "react"
 import { useSetUser } from "../contexts/UserContext"
 import QuestionariesLayout from "../components/Layouts/QuestionariesLayout/questionaries-layout"
 import useAppContext from "../contexts/AppContext"
+import { MyLottie } from "../components/atoms/MyLottie/my-lottie"
 
 export default function Home() {
   const [isLoading, setIsLoading] = React.useState(true)
@@ -21,7 +22,7 @@ export default function Home() {
   const { questionaries } = useAppContext()
 
   if (isLoading) { 
-    return <div>Loading...</div>
+    return <MyLottie />
   }
 
   return <QuestionariesLayout questionaries={questionaries} />
