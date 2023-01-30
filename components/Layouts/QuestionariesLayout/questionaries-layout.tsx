@@ -8,7 +8,6 @@ type QuestionariesLayoutProps = {
 }
 
 export default function QuestionariesLayout({ questionaries }: QuestionariesLayoutProps) {
-    console.log(questionaries)
     
     return (
         <Container sx={{ display:'flex', justifyContent:'center', alignItems:'center' }}>

@@ -32,7 +32,6 @@ export default withApiAuthRequired(async function handler(req, res) {
         });
 
         const readDataJson = await readData.json();
-        console.log(readDataJson);
 
         if (readDataJson.document === null) {
           await fetch(`${baseUrl}/insertOne`, {

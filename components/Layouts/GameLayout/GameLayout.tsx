@@ -5,10 +5,11 @@ import  AnswersTable  from "../../molecules/AnswersTable/answers-table";
 import useAppContext from "../../../contexts/AppContext";
 
 import { Box, Chip, Typography, Button, Rating } from "@mui/material";
-import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { styled } from "@mui/material/styles";
+import { CupLottie } from "../../atoms/MyLottie/cup-lottie";
+import { MyLottie } from "../../atoms/MyLottie/my-lottie";
 
 import { useRouter } from "next/router";
 import { useUser } from "../../../contexts/UserContext";
@@ -46,7 +47,7 @@ const endOfQuestions = questionIndex >= questions.length -1
 
 const user = useUser() 
 
-
+const authenticatedUser = user && user.email
 
 React.useEffect(() => { 
   const instructionsReaded =localStorage.getItem('instructionsReaded') 
@@ -56,8 +57,11 @@ React.useEffect(() => {
   if (questionIndex === 0 && !instructionsReaded) {
     setOpen(true)
   }
-
-  if (user && endOfQuestions && selectedAnswers.length >= 3 && hasSubmitted === false) { 
+}, [questionIndex, instructionsReaded])
+  
+React.useEffect(() => {
+    if (authenticatedUser && endOfQuestions && selectedAnswers.length >= 3 && hasSubmitted === false) { 
+    console.log('me ejecuto')
     const questionary = {
       postedAt: Date.now(),
       body: {
@@ -87,8 +91,7 @@ React.useEffect(() => {
         console.error('Error:', error);
     });
   }
-
-}, [ questionIndex, instructionsReaded, selectedAnswers, user, endOfQuestions, score, hasSubmitted])
+   }, [selectedAnswers, user, endOfQuestions, score, hasSubmitted])
 
 const RemainingLives = () => {
     return (
@@ -104,10 +107,10 @@ const RemainingLives = () => {
     )
 }
 
-    if ( questionIndex >= questions.length){
+if ( questionIndex >= questions.length && questions.length > 0) {
         return (
           <Box sx={{ width:'100%', height:'100%', justifySelf:'center', alignSelf:'center', display:'flex', flexDirection:'column', gap:'1rem', justifyContent:'center', alignItems:'center'  }}>
-            <EmojiEventsIcon sx={{ fontSize: 100 }} />
+            <CupLottie />
             <Typography variant="h2" component="h2">{score}</Typography>
             <Button 
             variant="outlined"
@@ -136,14 +139,16 @@ const RemainingLives = () => {
             >
               Ver Respuestas
             </Button>
-
-            <Button
-              variant="outlined"
-            >
-              <a href="/api/auth/login">
-                ¿Persistir los puntos? logeate. 
-              </a>
-            </Button>
+            {
+              !authenticatedUser && (
+              <Button
+              variant="outlined">
+                <a href="/api/auth/login">
+                  ¿Guardar los puntos? Registrate. 
+                </a>
+              </Button>
+              )
+            }
             {
               showAnswers && <AnswersTable />
             }
@@ -151,7 +156,7 @@ const RemainingLives = () => {
         )
     }
 
-    return (
+  return (
     <Box sx={{ width:'100%', 
      height:'100%', 
      justifySelf:'center',
@@ -161,14 +166,14 @@ const RemainingLives = () => {
      gap:'1rem',
      justifyContent:'center',
      alignItems:'center'
-     }}>
+      }}>
       <Box sx={{width:{xs:'100%', md:'60%' }, display:'flex', justifyContent:'space-between'}}>
         <ScoreTable score={score} />
         <RemainingLives />
       </Box>
       <Box sx={{width:'100%', display:'flex', justifyContent:'center', alignItems:'center' }}>
         {
-          questions.length > 0 ? <Question {...questions[questionIndex]} /> : <p>Loading...</p>
+          questions.length > 0 ? <Question {...questions[questionIndex]} /> : <MyLottie />
         } 
       </Box>
       <AlertDialogSlide 
@@ -178,7 +183,4 @@ const RemainingLives = () => {
         />
     </Box>
   )
-
-
-
 }
