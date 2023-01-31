@@ -6,6 +6,7 @@ import { AppContextProvider } from '../contexts/AppContext'
 import { UserProvider } from '@auth0/nextjs-auth0'
 import { UserProvider as AtlasUserProvider} from '../contexts/UserContext'
 import CustomCursor from '../components/atoms/CustomCursor/cat-cursor'
+import GoogleAnalytics from '../components/atoms/GoogleAnalytics'
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -43,6 +44,7 @@ export default function App({ Component, pageProps }: AppProps) {
         >
           <Layout>
             <CustomCursor />
+            <GoogleAnalytics />
           <Component {...pageProps} />
         </Layout>
         </AppContextProvider> 
