@@ -5,7 +5,7 @@ import Layout from '../components/Layouts/Layout'
 import { AppContextProvider } from '../contexts/AppContext'
 import { UserProvider } from '@auth0/nextjs-auth0'
 import { UserProvider as AtlasUserProvider} from '../contexts/UserContext'
-
+import CustomCursor from '../components/atoms/CustomCursor/cat-cursor'
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -41,7 +41,8 @@ export default function App({ Component, pageProps }: AppProps) {
             return
           }}
         >
-        <Layout>
+          <Layout>
+            <CustomCursor />
           <Component {...pageProps} />
         </Layout>
         </AppContextProvider> 

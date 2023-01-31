@@ -13,6 +13,8 @@ import { MyLottie } from "../../atoms/MyLottie/my-lottie";
 
 import { useRouter } from "next/router";
 import { useUser } from "../../../contexts/UserContext";
+import useSound from "use-sound";
+
 
 interface GameLayoutProps {
   questions: QuestionType[];
@@ -44,8 +46,14 @@ const [instructionsReaded, setInstructionsReaded] = React.useState(false)
 const [showAnswers, setShowAnswers] = React.useState(false)
 const [hasSubmitted, setHasSubmitted] = React.useState(false)
 const endOfQuestions = questionIndex >= questions.length -1   
-
-const user = useUser() 
+const gameOver = questionIndex >= questions.length && questions.length > 0
+  
+  const user = useUser() 
+  const userWins = score > 0
+  const userLose = score === 0
+  
+  const [play] = useSound('/sounds/success-finish.wav', { volume: 0.25 });
+  const [playError] = useSound('/sounds/lose.wav', { volume: 0.25 });
 
 const authenticatedUser = user && user.email
 
@@ -59,7 +67,14 @@ React.useEffect(() => {
   }
 }, [questionIndex, instructionsReaded])
   
-React.useEffect(() => {
+  React.useEffect(() => {
+    if (gameOver && userWins) {
+      play()
+    } 
+    if (gameOver && userLose) { 
+      playError()
+    }
+
     if (authenticatedUser && endOfQuestions && selectedAnswers.length >= 3 && hasSubmitted === false) { 
     console.log('me ejecuto')
     const questionary = {
