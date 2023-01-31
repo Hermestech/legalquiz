@@ -4,7 +4,9 @@ import { Answer } from '../../atoms/Answer/Answer';
 
 export const Question:React.FC<QuestionType> = ({ question, answersCollection }) => {
     return (
-      <Box sx={{ width: {sx:'350px', md:'500px'} }}>
+      <Box sx={{
+        width: { sx: '350px', md: '500px' }
+      }}>
         <Card sx={{ marginBottom:'1rem' }}>
           <CardContent>
             <Typography variant='h5' component='h2'>
@@ -12,7 +14,14 @@ export const Question:React.FC<QuestionType> = ({ question, answersCollection })
             </Typography>
            </CardContent>
         </Card>
-        <Box sx={{ display:'flex', justifyContent:'center', flexDirection:'column', gap:'.5rem', width:'100%'}}>
+        <Box sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          flexDirection: 'column',
+          gap: '.5rem',
+          width: '100%',
+          height: '50%'
+        }}>
         {answersCollection.answers.map(answer => (
           <Answer key={answer.textAnswer} answer={answer} question={question} />
         ))}
