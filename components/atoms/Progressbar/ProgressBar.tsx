@@ -42,7 +42,7 @@ const BrilliantGreen = styled.div`
   width: 99%;
   border-radius: 10px;
 `
-const ProgressBar = ({ progress }: ProgressBarProps) => {
+export const ProgressBar = ({ progress }: ProgressBarProps) => {
   const [width] = useDeviceSize();
   const isDesktop = width > 900;
 
@@ -54,5 +54,3 @@ const ProgressBar = ({ progress }: ProgressBarProps) => {
     </ProgressBarContainer>
   );
 };
-
-export default ProgressBar;

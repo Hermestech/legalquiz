@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import useAppContext from '../contexts/AppContext'
 import GameLayout from '../components/Layouts/GameLayout/GameLayout'
 import { Box } from '@mui/system'
-import ProgressBar from '../components/atoms/ProgressBar/ProgressBar'
+import { ProgressBar } from '../components/atoms/ProgressBar/ProgressBar'
 
 function getQuestionsFromQuestionary (questionaryId: string, questionaries: QuestionaryType[]) {
   const currentQuestionary = questionaries.find(questionary => questionary.sys.id === questionaryId)
