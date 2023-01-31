@@ -15,20 +15,20 @@ const ProgressBarContainer = styled.div<{ isDesktop: boolean }> `
   overflow: hidden;
 `;
 
-const animate = keyframes`
+const animate = (props: { progress: number }) => keyframes`
   0% {
     width: 0%;
   }
   100% {
-    width: ${(props) => props.progress}%;
+    width: ${(props.progress <= 100 ? props.progress : 100)}%;
   }
-`;
+`
 
-const ProgressGreen = styled.div`
+const ProgressGreen = styled.div < { progress: number } >`
   position: absolute;
   height: 100%;
   background-color: #23B4B8;
-  animation: ${animate} 2s linear;
+  animation: ${ animate } 2s linear;
   width: ${(props) => (props.progress <= 100 ? props.progress : 100)}%;
   display: flex;
   flex-direction: column;
