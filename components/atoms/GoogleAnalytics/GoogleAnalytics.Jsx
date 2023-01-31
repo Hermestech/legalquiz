@@ -9,7 +9,7 @@ export default function GoogleAnalytics() {
     React.useEffect(() => {
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const handleRouteChange = (url) => { 
-            window.gtag('config', GA_TRACKING_ID, {
+            window?.gtag('config', GA_TRACKING_ID, {
                 page_path: url,
             })
             router.events.on('routeChangeComplete', handleRouteChange)
