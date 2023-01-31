@@ -6,7 +6,7 @@ import { AppContextProvider } from '../contexts/AppContext'
 import { UserProvider } from '@auth0/nextjs-auth0'
 import { UserProvider as AtlasUserProvider} from '../contexts/UserContext'
 import CustomCursor from '../components/atoms/CustomCursor/cat-cursor'
-import GoogleAnalytics from '../components/atoms/GoogleAnalytics'
+import GoogleAnalytics from '../components/atoms/GoogleAnalytics/GoogleAnalytics' 
 import IndexPage from '../components/atoms/IndexPage/index-page'
 
 export default function App({ Component, pageProps }: AppProps) {
