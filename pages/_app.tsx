@@ -8,8 +8,6 @@ import { UserProvider as AtlasUserProvider} from '../contexts/UserContext'
 import CustomCursor from '../components/atoms/CustomCursor/cat-cursor'
 import IndexPage from '../components/atoms/IndexPage/index-page'
 import Script from 'next/script'
-import { ThemeProvider } from '@mui/material'
-import { theme } from '../theme/theme'
 
 const GA_TRACKING_ID = `${process.env.NEXT_PUBLIC_ANALYTICS_ID}`
 
