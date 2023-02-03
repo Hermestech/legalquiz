@@ -156,7 +156,9 @@ if ( questionIndex >= questions.length && questions.length > 0  || lifes === 0) 
               variant="outlined"
               onClick={() => setShowAnswers(!showAnswers)}
             >
-              Ocultar respuestas
+              {
+                showAnswers ? 'Ocultar respuestas' : 'Mostrar respuestas'
+              }
             </Button>
             {
               !authenticatedUser && (
