@@ -14,6 +14,7 @@ import { MyLottie } from "../../atoms/MyLottie/my-lottie";
 import { useRouter } from "next/router";
 import { useUser } from "../../../contexts/UserContext";
 import useSound from "use-sound";
+import { useAnalytics } from "../../../contexts/Analytics";
 
 
 interface GameLayoutProps {
@@ -43,8 +44,9 @@ const router = useRouter()
 const {  questionIndex, score, lifes, setQuestionIndex, setScore, setLifes, setSelectedAnswers, selectedAnswers } = useAppContext()
 const [open, setOpen] = React.useState(false);
 const [instructionsReaded, setInstructionsReaded] = React.useState(false)
-const [showAnswers, setShowAnswers] = React.useState(false)
+const [showAnswers, setShowAnswers] = React.useState(true)
 const [hasSubmitted, setHasSubmitted] = React.useState(false)
+const { analytics } = useAnalytics()  
 const endOfQuestions = questionIndex >= questions.length -1   
 const gameOver = questionIndex >= questions.length && questions.length > 0
   
@@ -76,7 +78,6 @@ React.useEffect(() => {
     }
 
     if (authenticatedUser && endOfQuestions && selectedAnswers.length >= 3 && hasSubmitted === false) { 
-    console.log('me ejecuto')
     const questionary = {
       postedAt: Date.now(),
       body: {
@@ -134,7 +135,9 @@ if ( questionIndex >= questions.length && questions.length > 0  || lifes === 0) 
                 setScore(0),
                 setLifes(3),
                 setSelectedAnswers([]),
+                analytics.track('playAgain', { score, lifes }),  
                 setHasSubmitted(false)  
+                
               }}
             >Jugar de nuevo</Button>
             <Button 
@@ -145,6 +148,7 @@ if ( questionIndex >= questions.length && questions.length > 0  || lifes === 0) 
               setLifes(3),
               setSelectedAnswers([]),
               setHasSubmitted(false),  
+              analytics.track('chooseOtherQuestionary')  
               router.push('/')
             }}
             >Elegir otro cuestionario</Button>
@@ -152,11 +156,14 @@ if ( questionIndex >= questions.length && questions.length > 0  || lifes === 0) 
               variant="outlined"
               onClick={() => setShowAnswers(!showAnswers)}
             >
-              Ver Respuestas
+              Ocultar respuestas
             </Button>
             {
               !authenticatedUser && (
-              <Button
+                <Button
+                  onClick={() => {
+                    analytics.track('login from result')
+                   }}
               variant="outlined">
                 <a href="/api/auth/login">
                   ¿Guardar los puntos? Registrate. 
