@@ -5,6 +5,10 @@ type AnswerType = {
 
 type QuestionType = {
     question: string
+    rightAnswerBase: {
+        reasoning: string
+        link: string
+    }
     answersCollection: {
         answers: AnswerType[]
     }
@@ -24,5 +28,9 @@ type QuestionaryType = {
 
 type SelectedAnswerType = {
     question: string,
+    rightAnswerBase: {
+        reasoning: string
+        link: string
+    }
     answer: AnswerType
 }

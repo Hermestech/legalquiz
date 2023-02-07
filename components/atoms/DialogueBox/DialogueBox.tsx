@@ -20,7 +20,7 @@ export const DialogueBox = ({ questionaryText }: DialogueBoxProps) => {
         return;
       }
 
-      timeoutId = setTimeout(typeText, 100);
+      timeoutId = setTimeout(typeText, 50);
     };
 
     typeText();
