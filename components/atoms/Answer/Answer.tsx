@@ -3,9 +3,9 @@ import { Button } from '@mui/material'
 import useAppContext from '../../../contexts/AppContext'
 import useSound from 'use-sound'
 
-export const Answer = ({ answer, question }: SelectedAnswerType ) => {
+export const Answer = ({ answer, question, rightAnswerBase  }: SelectedAnswerType ) => {
     const { setRightAnswer, setScore, setLifes, setQuestionIndex, score, lifes, questionIndex, setSelectedAnswers, selectedAnswers } = useAppContext()
-    
+
     const nextQuestion = () => {
         setQuestionIndex(questionIndex + 1)
     }
@@ -24,7 +24,7 @@ export const Answer = ({ answer, question }: SelectedAnswerType ) => {
             setLifes(lifes - 1)
         }
         nextQuestion()
-        setSelectedAnswers([...selectedAnswers, { question, answer }])
+        setSelectedAnswers([...selectedAnswers, { question, answer, rightAnswerBase }])
     }
 
 

@@ -2,7 +2,7 @@ import * as React from 'react'
 import { Card, CardContent, Typography, Box } from '@mui/material'
 import { Answer } from '../../atoms/Answer/Answer';
 
-export const Question:React.FC<QuestionType> = ({ question, answersCollection }) => {
+export const Question: React.FC<QuestionType> = ({ question, answersCollection, rightAnswerBase }) => {
     return (
       <Box sx={{
         width: { sx: '350px', md: '500px' }
@@ -22,8 +22,14 @@ export const Question:React.FC<QuestionType> = ({ question, answersCollection })
           width: '100%',
           height: '50%'
         }}>
+          
         {answersCollection.answers.map(answer => (
-          <Answer key={answer.textAnswer} answer={answer} question={question} />
+          <Answer
+            key={answer.textAnswer}
+            answer={answer}
+            question={question}
+            rightAnswerBase={rightAnswerBase}
+          />
         ))}
         </Box>
       </Box>

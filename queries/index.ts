@@ -30,6 +30,10 @@ query {
         questions: items{
           sys { ...SysFields }
           question
+          rightAnswerBase {
+            reasoning
+            link
+          }
           answersCollection(limit:10){
             answers: items {
               sys { ...SysFields }
@@ -42,5 +46,4 @@ query {
     }
   }
 }
-
 `
