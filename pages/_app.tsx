@@ -50,7 +50,7 @@ export default function App({ Component, pageProps }: AppProps) {
             <Layout>
               <DefaultSeo
                 title="Pregúntame derecho"
-                description="Pregúntame derecho es un juego tipo trivia donde podrás poner a prueba tus conocimientos sobre el derecho. Está enfocado a estudiantes de derecho y aficionados para aprender derecho de una manera más entretenida."
+                description="Pregúntame derecho es un juego tipo trivia donde podrás poner a prueba tus conocimientos y responder preguntas de derecho. Es una colección de aplicaciones y juegos  enfocados a estudiantes de derecho y aficionados para aprender derecho de una manera más entretenida. Nuestra misión es que el derecho sea más accesible y divertido. Nuestra mascota es un gato abogado 🐈" 
                 openGraph={{
                   type: 'website',
                   locale: 'es_ES',
@@ -58,10 +58,10 @@ export default function App({ Component, pageProps }: AppProps) {
                   site_name: 'Pregúntame derecho',
                   images: [
                     {
-                      url: 'https://preguntamederecho.com/lawyer-logo.png',
+                      url: 'https://www.preguntaderecho.com/lawyer-logo.png',
                       width: 1200,
                       height: 630,
-                      alt: 'Pregúntame derecho',
+                      alt: 'gato abogado',
                     },
                   ],
                 }}
