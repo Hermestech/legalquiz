@@ -180,7 +180,7 @@ if ( questionIndex >= questions.length && questions.length > 0  || lifes === 0) 
                 url="https://www.preguntaderecho.com/"
               
                 title={`Hice ${score} puntos en pregunta derecho. Y tú... ¿Cuánto sabes de derechos humanos?`}
-                via="PreguntaDerecho"
+                via="pregunta_d"
                 hashtags={['PreguntaDerecho']}
               >
                 <TwitterIcon size={32} round />
