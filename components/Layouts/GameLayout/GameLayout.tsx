@@ -16,6 +16,8 @@ import { useUser } from "../../../contexts/UserContext";
 import useSound from "use-sound";
 import { useAnalytics } from "../../../contexts/Analytics";
 
+import { TwitterShareButton, TwitterIcon, FacebookShareButton, FacebookIcon, WhatsappIcon, WhatsappShareButton } from "react-share";
+
 
 interface GameLayoutProps {
   questions: QuestionType[];
@@ -173,6 +175,33 @@ if ( questionIndex >= questions.length && questions.length > 0  || lifes === 0) 
               </Button>
               )
             }
+            <Box sx={{display:'flex', gap:'1rem'}}>
+              <TwitterShareButton
+                url="https://www.preguntaderecho.com/"
+              
+                title={`Hice ${score} puntos en pregunta derecho. Y tú... ¿Cuánto sabes de derechos humanos?`}
+                via="PreguntaDerecho"
+                hashtags={['PreguntaDerecho']}
+              >
+                <TwitterIcon size={32} round />
+              </TwitterShareButton>
+
+              <FacebookShareButton
+                url="https://www.preguntaderecho.com/"
+                quote={`Hice ${score} puntos en pregunta derecho. Y tú... ¿Cuánto sabes de derechos humanos?`}
+                hashtag="#PreguntaDerecho"
+              >
+                <FacebookIcon size={32} round />
+              </FacebookShareButton>
+
+              <WhatsappShareButton
+                url="https://www.preguntaderecho.com/"
+                title={`Hice ${score} puntos en pregunta derecho. Y tú... ¿Cuánto sabes de derechos humanos?`}
+              >
+                <WhatsappIcon size={32} round />
+              </WhatsappShareButton>
+
+            </Box>
             {
               showAnswers && <AnswersTable />
             }
