@@ -9,6 +9,7 @@ import CustomCursor from '../components/atoms/CustomCursor/cat-cursor'
 import Script from 'next/script'
 import { AnalyticsProvider } from '../contexts/Analytics'
 import { DefaultSeo } from 'next-seo'
+import Head from 'next/head'
 
 const GA_TRACKING_ID = `${process.env.NEXT_PUBLIC_ANALYTICS_ID}`
 
@@ -48,6 +49,9 @@ export default function App({ Component, pageProps }: AppProps) {
             }}
           >
             <Layout>
+              <Head>
+                <meta name="google-site-verification" content="6Jw5oMHJ6r6PPQdusV4OcVWhkjGWyH8g3iX7eBJcql4" />
+              </Head>
               <DefaultSeo
                 title="Pregúntame derecho"
                 description="Pregúntame derecho es un juego tipo trivia donde podrás poner a prueba tus conocimientos y responder preguntas de derecho. Es una colección de aplicaciones y juegos  enfocados a estudiantes de derecho y aficionados para aprender derecho de una manera más entretenida. Nuestra misión es que el derecho sea más accesible y divertido. Nuestra mascota es un gato abogado 🐈" 
