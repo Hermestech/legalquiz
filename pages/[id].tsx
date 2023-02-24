@@ -4,6 +4,7 @@ import useAppContext from '../contexts/AppContext'
 import GameLayout from '../components/Layouts/GameLayout/GameLayout'
 import { Box } from '@mui/system'
 import { ProgressBar } from '../components/atoms/progressbar/ProgressBar'
+import { Typography } from '@mui/material'
 
 function getQuestionsFromQuestionary (questionaryId: string, questionaries: QuestionaryType[]) {
   const currentQuestionary = questionaries.find(questionary => questionary.sys.id === questionaryId)
@@ -33,7 +34,8 @@ export default function GameId () {
         flexDirection: 'column',
         alignItems: 'center',
         minHeight: '100vh',
-        width: '100vw'
+        width: '100vw',
+        gap: '4rem',
       }}
     >
       <Box
@@ -44,10 +46,11 @@ export default function GameId () {
           justifyContent: 'center',
           minHeight: '10%',
           width: '100%',
-          marginBottom: '2rem',
+          gap: '1rem',
         }}
       >
-        <ProgressBar progress={questionIndex * 10}/>
+        <Typography variant="body2">Pregunta {questionIndex + 1} de {questions.length}</Typography>
+        <ProgressBar progress={questionIndex * questions.length}/>
       </Box>
       <GameLayout questions={questions} />
     </Box>
