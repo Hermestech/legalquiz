@@ -28,7 +28,6 @@ const ProgressGreen = styled.div < { progress: number } >`
   position: absolute;
   height: 99%;
   background-color: #23B4B8;
-  animation: ${ animate } 2s linear;
   width: ${(props) => (props.progress <= 100 ? props.progress : 100)}%;
   display: flex;
   flex-direction: column;

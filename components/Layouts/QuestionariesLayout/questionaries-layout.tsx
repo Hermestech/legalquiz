@@ -40,12 +40,12 @@ export default function QuestionariesLayout({ questionaries }: QuestionariesLayo
                                 padding: '1rem',
                                 display: 'flex',
                                 justifyContent: 'center',
-                                alignItems: 'center'
-                            }}
+                                    alignItems: 'center',
+                                    backgroundColor: 'primary.main',
+                                    color: 'primary.contrastText',
+                                }}
                         >
-                            <Button variant="contained" color="primary">
-                                Iniciar Juego 
-                            </Button>
+                            Iniciar Juego...
                         </CardActionArea>   
                         
                         </Card>
