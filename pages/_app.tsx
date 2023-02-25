@@ -10,10 +10,15 @@ import Script from 'next/script'
 import { AnalyticsProvider } from '../contexts/Analytics'
 import { DefaultSeo } from 'next-seo'
 import Head from 'next/head'
+import { hotjar } from 'react-hotjar'
 
 const GA_TRACKING_ID = `${process.env.NEXT_PUBLIC_ANALYTICS_ID}`
 
 export default function App({ Component, pageProps }: AppProps) {
+
+  React.useEffect(() => { 
+    hotjar.initialize(3383427, 6)
+  }, [])
   return (
     <AnalyticsProvider>
       <UserProvider>
