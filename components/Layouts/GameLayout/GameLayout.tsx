@@ -15,6 +15,7 @@ import { useRouter } from "next/router";
 import { useUser } from "../../../contexts/UserContext";
 import useSound from "use-sound";
 import { useAnalytics } from "../../../contexts/Analytics";
+import {TextField} from "@mui/material";
 
 import { TwitterShareButton, TwitterIcon, FacebookShareButton, FacebookIcon, WhatsappIcon, WhatsappShareButton } from "react-share";
 
@@ -48,6 +49,7 @@ const [open, setOpen] = React.useState(false);
 const [instructionsReaded, setInstructionsReaded] = React.useState(false)
 const [showAnswers, setShowAnswers] = React.useState(true)
 const [hasSubmitted, setHasSubmitted] = React.useState(false)
+const [emailMarketingSaved, setEmailMarketingSaved] = React.useState(false)
 const { analytics } = useAnalytics()  
 const endOfQuestions = questionIndex >= questions.length -1   
 const gameOver = questionIndex >= questions.length && questions.length > 0
@@ -59,7 +61,28 @@ const gameOver = questionIndex >= questions.length && questions.length > 0
   const [play] = useSound('/sounds/success-finish.wav', { volume: 0.25 });
   const [playError] = useSound('/sounds/lose.wav', { volume: 0.25 });
 
-const authenticatedUser = user && user.email
+  const authenticatedUser = user && user.email
+  
+  const handleSaveEmail = (e: React.FormEvent<HTMLFormElement>) => { 
+    e.preventDefault()
+    const email = e.currentTarget.email.value
+    console.log(email)
+    fetch('/api/emailmarketing', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ email })
+    })
+      .then(response => {
+        if (response.ok) {
+          setEmailMarketingSaved(true)
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+  }
 
 React.useEffect(() => { 
   const instructionsReaded =localStorage.getItem('instructionsReaded') 
@@ -175,6 +198,34 @@ if ( questionIndex >= questions.length && questions.length > 0  || lifes === 0) 
               </Button>
               )
             }
+            <Box component={'form'}
+              onSubmit={handleSaveEmail}
+              sx={{
+                display: 'flex', flexDirection: 'column', gap: '1rem', justifyContent: 'center', alignItems: 'center', width: '100%',
+                textAlign: 'center'
+              }}
+            >
+              {
+                !emailMarketingSaved ? (
+                  <>
+               <Typography variant="body2" component="h4">Ingresa tu correo para notificarte cuando tengamos nuevas preguntas.</Typography>
+              <TextField
+                id="email"
+                label="Email"
+                variant="outlined"
+                type="email"
+                name="email"
+                required
+              />
+              
+              <Button variant="outlined" type="submit">Enviar</Button>
+                  </>
+                ) :
+                  <>
+                  <Typography>Gracias por suscribirte, te avisaremos cuando haya nuevas preguntas.</Typography>
+                  </>
+              }
+          </Box>
             <Box sx={{display:'flex', gap:'1rem'}}>
               <TwitterShareButton
                 url="https://www.preguntaderecho.com/"
