@@ -26,7 +26,7 @@ query {
       title
       description
       difficulty
-      questionsCollection: questionaryquestionsCollection(limit:10){
+      questionsCollection: questionaryquestionsCollection(limit:50){
         questions: items{
           sys { ...SysFields }
           question
