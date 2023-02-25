@@ -28,8 +28,13 @@ export default function Landing() {
                     <Typography variant={ isDesktop ? 'h2' : 'h3' }>JUEGA</Typography>
                     <Typography variant={ isDesktop ? 'h2' : 'h3' }>APRENDE</Typography>
                     <Typography variant={ isDesktop ? 'h2' : 'h3' }>DEFIENDETE</Typography>
-                    <Typography variant='body1'>
-{'Pregúntame Derecho" es una plataforma de juegos tipo trivia diseñada para poner a prueba tus conocimientos en el área del derecho. Con una colección de aplicaciones y juegos, esta plataforma es ideal para estudiantes y aficionados que deseen aprender derecho de forma entretenida. En "Pregúntame Derecho" nos enfocamos en hacer que el derecho sea más accesible y divertido para todos, y para ello contamos con la ayuda de nuestra mascota, un gato abogado 🐈. ¡Únete a nuestra comunidad y diviértete mientras aprendes!'}
+                     <Typography variant='body1'>
+                        {
+                            isDesktop ? ( 'Pregúntame Derecho" es una plataforma de juegos tipo trivia diseñada para poner a prueba tus conocimientos en el área del derecho. Con una colección de aplicaciones y juegos, esta plataforma es ideal para estudiantes y aficionados que deseen aprender derecho de forma entretenida. En "Pregúntame Derecho" nos enfocamos en hacer que el derecho sea más accesible y divertido para todos, y para ello contamos con la ayuda de nuestra mascota, un gato abogado 🐈. ¡Únete a nuestra comunidad y diviértete mientras aprendes!')
+                                : (
+                                    'Pregúntame Derecho" es una plataforma de juegos tipo trivia diseñada para poner a prueba tus conocimientos en el área del derecho.'
+                                ) 
+                            }
                     </Typography>
                     <Box sx={{
                         width: '100%',
@@ -38,7 +43,9 @@ export default function Landing() {
                         paddingRight:'1rem'
                     }}>
                         <Link href='/game'>
-                            <Button variant='contained' sx={{ marginTop: '1rem' }}>Jugar</Button>
+                            <Button variant='contained' sx={{ marginTop: '1rem', width: { xs: '300px', md: '200px' } }}>
+                                Ir al Juego
+                            </Button>
                         </Link>
                     </Box>
                 </Grid>
