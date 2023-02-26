@@ -162,7 +162,7 @@ if ( questionIndex >= questions.length && questions.length > 0  || lifes === 0) 
                 setSelectedAnswers([]),
                 analytics.track('playAgain', { score, lifes }),  
                 setHasSubmitted(false)  
-                
+    
               }}
             >Jugar de nuevo</Button>
             <Button 
@@ -174,7 +174,7 @@ if ( questionIndex >= questions.length && questions.length > 0  || lifes === 0) 
               setSelectedAnswers([]),
               setHasSubmitted(false),  
               analytics.track('chooseOtherQuestionary')  
-              router.push('/')
+              router.push('/game')
             }}
             >Elegir otro cuestionario</Button>
             <Button
@@ -226,7 +226,8 @@ if ( questionIndex >= questions.length && questions.length > 0  || lifes === 0) 
                   </>
               }
           </Box>
-            <Box sx={{display:'flex', gap:'1rem'}}>
+              <Typography>Compartir resultado</Typography>
+            <Box sx={{ display: 'flex', gap: '1rem' }}>
               <TwitterShareButton
                 url="https://www.preguntaderecho.com/"
               
