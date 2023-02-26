@@ -35,7 +35,7 @@ export default function GameId () {
         alignItems: 'center',
         minHeight: '100vh',
         width: '100vw',
-        gap: '1rem',
+        gap: {xs: '4rem', md: '1rem'}
       }}
     >
       <Box
