@@ -1,41 +1,24 @@
 import * as React from "react"
-import { useSetUser } from "../contexts/UserContext"
 import QuestionariesLayout from "../components/Layouts/QuestionariesLayout/questionaries-layout"
 import useAppContext from "../contexts/AppContext"
+import { useRegisterUser } from "../hooks/useRegister"
 import { MyLottie } from "../components/atoms/MyLottie/my-lottie"
-import { useAnalytics } from "../contexts/Analytics"
+import { useUser } from "@auth0/nextjs-auth0"
 
-export default function Home() {
-  const { analytics } = useAnalytics()
-  const [isLoading, setIsLoading] = React.useState(true)
-  const setUser = useSetUser()
-
-  React.useEffect(() => { 
-    (async () => { 
-      const getUser = await fetch("/api/user")
-      const getUserJson = await getUser.json()
-      setUser(getUserJson)
-
-      if (getUserJson.email) { 
-        analytics.track('Login Success', {
-        email: getUserJson.email,
-        name: getUserJson.name,
-        id: getUserJson.id
-      })
-      }
-
-      setIsLoading(false)
-    }
-    )()
-    analytics.page('/')
-  }, [])
-
+export default function Game() {
+  const { user, error, isLoading  } = useUser()
+  useRegisterUser(user)
   const { questionaries } = useAppContext()
 
+  
   if (isLoading) { 
     return <MyLottie />
   }
 
+  if (error) { 
+    return <div>Oops... {error.message} </div>
+  }
+
+
   return <QuestionariesLayout questionaries={questionaries} />
 }
-// export const getServerSideProps = withPageAuthRequired()

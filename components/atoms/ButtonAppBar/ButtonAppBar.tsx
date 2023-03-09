@@ -26,6 +26,11 @@ export default function ButtonAppBar() {
       return (
         <>
           <Button color="inherit">
+            <Link href={'/ranking'}>
+              Ranking 
+            </Link>
+          </Button>
+          <Button color="inherit">
             {user.name}
           </Button>
           <Button color="inherit">

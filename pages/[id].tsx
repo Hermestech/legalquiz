@@ -17,10 +17,10 @@ export default function GameId () {
     const { questionaries, questionIndex } = useAppContext()
     const [questions, setQuestions] = React.useState<QuestionType[]>([])
 
-    React.useEffect(() => {
+  React.useEffect(() => {
         if (questionaryId) {
             const myQuestions = getQuestionsFromQuestionary(questionaryId as string, questionaries)
-            setQuestions(myQuestions)   
+          setQuestions(myQuestions)  
         }
     },[questionaryId, questionaries])
 
@@ -52,7 +52,9 @@ export default function GameId () {
         <Typography variant="body2">Pregunta {questionIndex + 1} de {questions.length}</Typography>
         <ProgressBar progress={questionIndex * questions.length}/>
       </Box>
-      <GameLayout questions={questions} />
+      <GameLayout
+        currentQuestionaryId={questionaryId as string}
+        questions={questions} />
     </Box>
 
   )

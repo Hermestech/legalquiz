@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 import * as React from 'react';
 // services
-import { getQuestions, getQuestionaries } from '../lib/contentful/get-entries.graphql';
+import { getQuestionaries } from '../lib/contentful/get-entries.graphql';
 import { PropsWithChildren } from 'react';
 
 interface AppContextType {
@@ -20,9 +21,26 @@ interface AppContextType {
     setSelectedAnswers: React.Dispatch<React.SetStateAction<SelectedAnswerType[]>>;
 }
 
-export const AppContext = React.createContext({} as AppContextType );
+const AppContextDefaultValues: AppContextType = {
+    questionaries: [],
+    questions: [],
+    rightAnswer: false,
+    questionIndex: 0,
+    score: 0,
+    lifes: 0,
+    selectedAnswers: [],
+    setRightAnswer: () => { },
+    setQuestionIndex: () => { },
+    setScore: () => { },
+    setLifes: () => { },
+    setQuestions: () => { },
+    setQuestionaries: () => { },
+    setSelectedAnswers: () => { }
+}
 
-export const AppContextProvider: React.FC<PropsWithChildren<AppContextType>>  = ({ children}) => {
+export const AppContext = React.createContext<AppContextType>(AppContextDefaultValues);
+
+export const AppContextProvider: React.FC<PropsWithChildren<Partial<AppContextType>>>  = ({ children}) => {
     const [questionaries, setQuestionaries] = React.useState<QuestionaryType[]>([]);
     const [questions, setQuestions] = React.useState<QuestionType[]>([]);
     const [rightAnswer, setRightAnswer] = React.useState<boolean>(false);
@@ -66,11 +84,7 @@ export const AppContextProvider: React.FC<PropsWithChildren<AppContextType>>  = 
 };
 
 export function useAppContext() {
-    const context = React.useContext(AppContext);
-    if (context === undefined) {
-        throw new Error('useAppContext must be used within a AppContextProvider');
-    }
-    return context;
+    return React.useContext(AppContext);
 }
 
 export default useAppContext;
