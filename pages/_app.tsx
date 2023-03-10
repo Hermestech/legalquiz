@@ -4,7 +4,6 @@ import type { AppProps } from 'next/app'
 import Layout from '../components/Layouts/Layout'
 import { AppContextProvider } from '../contexts/AppContext'
 import { UserProvider } from '@auth0/nextjs-auth0'
-import { UserProvider as AtlasUserProvider} from '../contexts/UserContext'
 import CustomCursor from '../components/atoms/CustomCursor/cat-cursor'
 import Script from 'next/script'
 import { AnalyticsProvider } from '../contexts/Analytics'
@@ -22,37 +21,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <AnalyticsProvider>
       <UserProvider>
-        <AtlasUserProvider>
-          <AppContextProvider
-            questionaries={[]}
-            questions={[]}
-            rightAnswer={false}
-            questionIndex={0}
-            score={0}
-            lifes={0}
-            selectedAnswers={[]}
-            setRightAnswer={() => {
-              return
-            }}
-            setQuestionIndex={() => {
-              return
-            }}
-            setScore={() => {
-              return
-            }}
-            setLifes={() => {
-              return
-            }}
-            setSelectedAnswers={() => {
-              return
-            }}
-            setQuestions={() => {
-              return
-            }}
-            setQuestionaries={() => {
-              return
-            }}
-          >
+          <AppContextProvider>
             <Layout>
               <Head>
                 <meta name="google-site-verification" content="6Jw5oMHJ6r6PPQdusV4OcVWhkjGWyH8g3iX7eBJcql4" />
@@ -102,7 +71,6 @@ export default function App({ Component, pageProps }: AppProps) {
               <Component {...pageProps} />
                 </Layout>
           </AppContextProvider> 
-        </AtlasUserProvider>
       </UserProvider>
     </AnalyticsProvider>
   )

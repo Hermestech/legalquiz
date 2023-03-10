@@ -68,6 +68,11 @@ export default function BasicMenu() {
             </Link>
         </MenuItem>
         <MenuItem onClick={handleClose}>
+          <Link href="/ranking">
+            Ranking
+          </Link>
+        </MenuItem>
+        <MenuItem onClick={handleClose}>
             <Link href="/">
                 Inicio
             </Link>

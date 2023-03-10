@@ -5,11 +5,14 @@ import { Answer } from '../../atoms/Answer/Answer';
 export const Question: React.FC<QuestionType> = ({ question, answersCollection, rightAnswerBase }) => {
     return (
       <Box sx={{
-        width: { sx: '350px', md: '500px' }
+        width: {
+          sx: '350px',
+          md: '500px',
+        }
       }}>
         <Card sx={{ marginBottom:'1rem' }}>
           <CardContent>
-            <Typography variant='h5' component='h2'>
+            <Typography variant='h6' component='h2'>
            {question}
             </Typography>
            </CardContent>
