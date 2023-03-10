@@ -3,10 +3,8 @@ import Head from 'next/head'
 import { Grid, Box, Typography, Button, Container } from '@mui/material'
 import Image from 'next/image'
 import { useDeviceSize } from '../hooks/useDeviceSize'
-import dynamic from 'next/dynamic'
 import Link from 'next/link'
 
-const ReactPlayer = dynamic(() => import('react-player'), { ssr: false })
 
 export default function Landing() {
     const  [width]  = useDeviceSize()
@@ -25,14 +23,13 @@ export default function Landing() {
         </div>
             <Grid container sx={{  marginTop:'2rem' }}>
                 <Grid item xs={12} md={6} sx={{paddingRight:'1rem', textAlign: {xs:'center', md:'left'}}}>
-                    <Typography variant={ isDesktop ? 'h2' : 'h3' }>JUEGA</Typography>
-                    <Typography variant={ isDesktop ? 'h2' : 'h3' }>APRENDE</Typography>
-                    <Typography variant={ isDesktop ? 'h2' : 'h3' }>DEFIENDETE</Typography>
+                    <Typography variant={ isDesktop ? 'h2' : 'h3' }>PREGUNTA</Typography>
+                    <Typography variant={ isDesktop ? 'h2' : 'h3' }>DERECHO</Typography>
                      <Typography variant='body1'>
                         {
-                            isDesktop ? ( 'Pregúntame Derecho" es una plataforma de juegos tipo trivia diseñada para poner a prueba tus conocimientos en el área del derecho. Con una colección de aplicaciones y juegos, esta plataforma es ideal para estudiantes y aficionados que deseen aprender derecho de forma entretenida. En "Pregúntame Derecho" nos enfocamos en hacer que el derecho sea más accesible y divertido para todos, y para ello contamos con la ayuda de nuestra mascota, un gato abogado 🐈. ¡Únete a nuestra comunidad y diviértete mientras aprendes!')
+                            isDesktop ? ( 'Pregúntame Derecho es una plataforma de juegos tipo trivia diseñada para poner a prueba tus conocimientos en el área del derecho. Con una colección de aplicaciones y juegos, esta plataforma es ideal para estudiantes y aficionados que deseen aprender derecho de forma entretenida. En "Pregúntame Derecho" nos enfocamos en hacer que el derecho sea más accesible y divertido para todos, y para ello contamos con la ayuda de nuestra mascota, un gato abogado 🐈. ¡Únete a nuestra comunidad y diviértete mientras aprendes!')
                                 : (
-                                    'Pregúntame Derecho" es una plataforma de juegos tipo trivia diseñada para poner a prueba tus conocimientos en el área del derecho.'
+                                    'Pregúntame Derecho es una plataforma de juegos tipo trivia diseñada para poner a prueba tus conocimientos en el área del derecho.'
                                 ) 
                             }
                     </Typography>
@@ -79,13 +76,7 @@ export default function Landing() {
                     {'Pregunta Derecho" es una plataforma de aprendizaje donde podrás adquirir conocimientos fundamentales sobre tus derechos cotidianos y prepararte para exámenes en la materia. A través de nuestra experiencia educativa, te brindamos herramientas para que puedas desenvolverte con confianza en situaciones legales y comprendas tus derechos de forma clara y accesible. ¡Únete a nosotros y fortalece tus habilidades en Derecho!'  
                     }
                 </Typography>
-                <ReactPlayer
-                    url='/video.MP4'
-                    controls
-                    playsinline
-                    width={isDesktop ? 500 : 300}
-                    height={isDesktop ? 500 : 300}
-                />
+
             </Box>
             <Grid container sx={{ marginTop: '2rem', gap:{xs:'2rem',md:'0'}}}>
                 <Grid item xs={12} md={4} sx={{ paddingRight: '1rem', textAlign: { xs: 'center', md: 'left' } }}>

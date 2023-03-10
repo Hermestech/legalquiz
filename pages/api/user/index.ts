@@ -10,7 +10,7 @@ export default withApiAuthRequired(async function createUser(req: NextApiRequest
     const { accesToken } = await getAccessToken(req, res) as any;
     const { user } = getSession(req, res) as any;
     const { email, nickname, sub } = user;
-    const baseUrl = 'http://localhost:8000/'
+    const baseUrl = process.env.API_BASE_URL;
 
     try {
         const response = await fetch(`${baseUrl}user`, {

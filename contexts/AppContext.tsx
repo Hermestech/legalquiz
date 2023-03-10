@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import * as React from 'react';
 // services
-import { getQuestionaries } from '../lib/contentful/get-entries.graphql';
+// import { getQuestionaries } from '../lib/contentful/get-entries.graphql';
 import { PropsWithChildren } from 'react';
 
 interface AppContextType {
@@ -49,16 +49,6 @@ export const AppContextProvider: React.FC<PropsWithChildren<Partial<AppContextTy
     const [score, setScore] = React.useState<number>(0);
     const [lifes, setLifes] = React.useState<number>(3);
 
-    React.useEffect(() => {
-        const fetchQuestionaries = async () => {
-            const response = await getQuestionaries();
-            setQuestionaries(response.questionaries);
-        }
-        fetchQuestionaries();
-
-    }
-    , []);
-
     const values = React.useMemo(() => ({
         questions,
         rightAnswer,
@@ -88,3 +78,4 @@ export function useAppContext() {
 }
 
 export default useAppContext;
+

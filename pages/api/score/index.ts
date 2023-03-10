@@ -1,3 +1,5 @@
+
+
 import {
     getAccessToken,
     withApiAuthRequired,
@@ -10,7 +12,7 @@ export default withApiAuthRequired(async function Score(req: NextApiRequest, res
     const { user } = getSession(req, res) as any;
     const { sub } = user;
     const { score } = req.body;
-    const baseUrl = 'http://localhost:8000/'
+    const baseUrl = process.env.API_BASE_URL;
 
     if (req.method === 'POST') {
         try {

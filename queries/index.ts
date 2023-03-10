@@ -26,6 +26,10 @@ query {
       title
       description
       difficulty
+    	portrait{
+        title
+        url
+      }
       questionsCollection: questionaryquestionsCollection(limit:50){
         questions: items{
           sys { ...SysFields }

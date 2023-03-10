@@ -18,6 +18,10 @@ type QuestionaryType = {
     description: string
     title: string   
     difficulty: string
+    portrait: {
+        title: string
+        url: string
+    }
     questionsCollection: {
         questions: QuestionType[]
     }

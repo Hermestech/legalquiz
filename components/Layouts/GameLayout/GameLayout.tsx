@@ -14,7 +14,6 @@ interface GameLayoutProps {
 
 export default function GameLayout({
   questions,
-  currentQuestionaryId
 }: GameLayoutProps) {
 const { user } = useUser()
 const { questionIndex, score, lifes, selectedAnswers } = useAppContext()

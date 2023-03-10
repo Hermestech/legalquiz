@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { Box, Button, TextField, Typography } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 import { CupLottie } from "../atoms/MyLottie/cup-lottie";
 
 import useAppContext from '../../contexts/AppContext';
@@ -32,31 +32,8 @@ export const FeedbackScreen = () => {
     setSelectedAnswers,
    } = useAppContext()
     const router = useRouter()
-  const [emailMarketingSaved, setEmailMarketingSaved] = React.useState(false)
-  const [hasSubmitted, setHasSubmitted] = React.useState(false)
   const [showAnswers, setShowAnswers] = React.useState(true)
 
-
-    const handleSaveEmail = (e: React.FormEvent<HTMLFormElement>) => { 
-    e.preventDefault()
-    const email = e.currentTarget.email.value
-    console.log(email)
-    fetch('/api/emailmarketing', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ email })
-    })
-      .then(response => {
-        if (response.ok) {
-          setEmailMarketingSaved(true)
-        }
-      })
-      .catch(error => {
-        console.error('Error:', error);
-      });
-  }
     return (
           <Box sx={feedbackScreen.main}>
             <CupLottie />
@@ -68,9 +45,7 @@ export const FeedbackScreen = () => {
                 setScore(0),
                 setLifes(3),
                 setSelectedAnswers([]),
-                analytics.track('playAgain'),  
-                setHasSubmitted(false)  
-    
+                analytics.track('playAgain')
               }}
             >Jugar de nuevo</Button>
             <Button 
@@ -80,7 +55,6 @@ export const FeedbackScreen = () => {
               setScore(0), 
               setLifes(3),
               setSelectedAnswers([]),
-              setHasSubmitted(false),  
               analytics.track('chooseOtherQuestionary')  
               router.push('/game')
             }}
@@ -101,40 +75,12 @@ export const FeedbackScreen = () => {
                    }}
               variant="outlined">
                 <a href="/api/auth/login">
-                  ¿Guardar los puntos? Registrate. 
+                  Ve tu posición en el ranking
                 </a>
               </Button>
               )
             }
-            <Box component={'form'}
-              onSubmit={handleSaveEmail}
-              sx={{
-                display: 'flex', flexDirection: 'column', gap: '1rem', justifyContent: 'center', alignItems: 'center', width: '100%',
-                textAlign: 'center'
-              }}
-            >
-              {
-                !emailMarketingSaved ? (
-                  <>
-               <Typography variant="body2" component="h4">Ingresa tu correo para notificarte cuando tengamos nuevas preguntas.</Typography>
-              <TextField
-                id="email"
-                label="Email"
-                variant="outlined"
-                type="email"
-                name="email"
-                required
-              />
-              
-              <Button variant="outlined" type="submit">Enviar</Button>
-                  </>
-                ) :
-                  <>
-                  <Typography>Gracias por suscribirte, te avisaremos cuando haya nuevas preguntas.</Typography>
-                  </>
-              }
-          </Box>
-              <Typography>Compartir resultado</Typography>
+            <Typography>Compartir resultado</Typography>
             <Box sx={{ display: 'flex', gap: '1rem' }}>
               <TwitterShareButton
                 url="https://www.preguntaderecho.com/"

@@ -24,7 +24,6 @@ export class ApiService {
     });
     return response.json();
     } catch (error: any) {
-      console.log(error)
       return error.message;
     }
   }
@@ -32,6 +31,6 @@ export class ApiService {
 
 export class ApiScore {
   static async getScore() { 
-    return await ApiService.get('http://localhost:8000/score');
+    return await ApiService.get(process.env.API_BASE_URL + 'score');
   }
 }

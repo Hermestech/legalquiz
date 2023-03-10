@@ -15,13 +15,10 @@ export const useRegisterUser = (user:any) => {
           body: JSON.stringify(user),
         });
         const data = await res.json();
-        console.log(data);
         if (data.statusCode === 400) {
-          console.log(data.message);
           return;
         }
         if (res.status === 200) {
-          console.log("User created successfully");
           setIsRegistered(true);
         }
       } catch (error) {

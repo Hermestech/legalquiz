@@ -10,7 +10,6 @@ interface RankingProps {
 
 
 const Ranking: React.FC<RankingProps> = ({ ranking }) => { 
-    console.log(ranking);
 
     return (
         <>
