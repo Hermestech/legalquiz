@@ -20,9 +20,8 @@ const Ranking: React.FC<RankingProps> = ({ ranking }) => {
 
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
     const ranking = await ApiScore.getScore();
-
     return {
         props: {
             ranking
