@@ -68,7 +68,7 @@ export const FeedbackScreen = () => {
               }
             </Button>
             {
-              !user && (
+              !user ?(
                 <Button
                   onClick={() => {
                     analytics.track('login from result')
@@ -77,6 +77,16 @@ export const FeedbackScreen = () => {
                 <a href="/api/auth/login">
                   Ve tu posición en el ranking
                 </a>
+              </Button>
+          ) : (
+              <Button
+                onClick={() => {
+                  analytics.track('go to ranking')
+                  router.push('/ranking')
+                }}
+                variant="outlined"
+              >
+                  Ve tu posición en el ranking
               </Button>
               )
             }

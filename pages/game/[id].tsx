@@ -48,7 +48,7 @@ export default function GameId () {
         }}
       >
         <Typography variant="body2">Pregunta { questionIndex === 0  ? 1 : questionIndex } de {questions.length}</Typography>
-        <ProgressBar progress={questionIndex * questions.length}/>
+        <ProgressBar progress={questionIndex / questions.length * 100} />
       </Box>
       <GameLayout
         currentQuestionaryId={questionaryId as string}
