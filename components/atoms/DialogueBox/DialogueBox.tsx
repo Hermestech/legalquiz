@@ -24,7 +24,7 @@ export const DialogueBox = ({ questionaryText }: DialogueBoxProps) => {
     };
 
     typeText();
-  }, []);
+  }, [questionaryText]); // Agrega questionaryText como una dependencia del useEffect
 
   return (
     <div>

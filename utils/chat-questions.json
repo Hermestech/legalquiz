@@ -1,0 +1,44 @@
+{
+    "list":[
+        {
+            "id":1,
+            "question": "Estás relajado, tomando unas vacaciones en Acapulco, cuando ves a un muchacho famoso vendiendo empanadas. Decides grabarlo sin pedirle permiso y subir ese video a tu instagram. ¿Puedes hacerlo o no? ¿Por qué? "
+        },
+        {
+            "id":2,
+            "question": "Define qué es un derecho de autor."
+        },
+        {
+            "id":3,
+            "question": "¿Cuáles son las principales fuentes del derecho en México y cuál es su relevancia en la protección de los derechos fundamentales?"
+        },
+        {
+            "id":4,
+            "question": "¿Cómo funciona el juicio de amparo en México y cua´l es su relevancia en la protección de los derechos fundamentales de los ciudadanos?"
+        },
+        {
+            "id":5,
+            "question": "Cuál es el papel del poder judicial de federación en México y cómo se organiza para garantizar la imparcialidad y el acceso a la justicia"
+        },
+        {
+            "id":6,
+            "question": "Menciona los tres poderes de gobinerno establecidos en la constitución de 1917 y explica sus funciones principales"
+        },
+        {
+            "id":7,
+            "question": "¿Qué es el principio de división de poderes y por qué es importante en el sistema constitucional mexicano?"
+        },
+        {
+            "id": 8,
+        "question": "¿Qué significa el principio de supremacía constitucional y cómo se manifiesta en el sistema jurídico mexicano?"
+        },
+        {
+            "id":9,
+            "question": "C¿uál es el papel del Tribunal Electoral del Poder Judicial de la Federación en la protección de los derechos politicos en México?"
+        },
+        {
+            "id": 10,
+            "question": "¿Cuáles son los mecanismos constitucionales para lleva a cabo reformas a la constitución mexicana y cuáles son los requisitos y procedimientos para lograrlo?"
+        }
+    ]
+}
