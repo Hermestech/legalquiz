@@ -21,10 +21,8 @@ export default function Partner() {
   const [isGenerating, setIsGenerating] = useState<boolean>(false)
 
   
-  console.log(currentQuestion)
 
   const onUserChangedText = (event: React.ChangeEvent<HTMLTextAreaElement>) => { 
-    console.log(event.target.value)
     setUserInput(event.target.value)
   }
 
@@ -47,7 +45,6 @@ export default function Partner() {
       setApiResponse(`${output.text}`)
       setIsGenerating(false)
     } catch (error) {
-      console.log(error)
       setIsGenerating(false)
     }
   }
